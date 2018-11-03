@@ -1,0 +1,33 @@
+<%= form_with(model: work, local: true) do |form| %>
+  <% if work.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(work.errors.count, "error") %> prohibited this work from being saved:</h2>
+
+      <ul>
+      <% work.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :제목 %>
+    <%= form.text_field :title %>
+  </div>
+
+  <div class="field">
+    <%= form.label :내용 %>
+    <%= form.text_area :content %>
+  </div>
+
+  <div class="field">
+    <%= form.fields_for :due do |due_form| %>
+      마감기한 : <%= due_form.date_field :dueDate %>
+    <% end %>  
+  </div>
+
+  <div class="actions">
+    <%= form.submit "완료" %>
+  </div>
+<% end %>
