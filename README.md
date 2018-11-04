@@ -1,28 +1,13 @@
-<<<<<<< HEAD
-# README
+# ToDo
+***
+할 일 작성/수정/삭제와 일의 마감기한을 관리할 수 있습니다.
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
 
-Things you may want to cover:
+#### 설치방법
+***
+
 
 * Ruby version
+ToDO 사이트는 ruby 2.3.7 / rails 5.2.1 를 기준으로 만들어졌습니다.
 
-* System dependencies
 
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
-=======
-# Todolist
->>>>>>> 27639a91bcc0f771cdc2ff15689797617414b9ff
