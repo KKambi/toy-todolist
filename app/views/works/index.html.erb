@@ -1,95 +1,120 @@
-<h1>할 일</h1>
+<div class="header">
+  <span id="header-title">
+    <img src="/success_green.png" id="header-icon">
+    Todo
+  </span>
 
-<table>
-  <thead>
-    <tr>
-      <th>User</th>
-      <th>Title</th>
-      <th>Content</th>
-      <th>Completion</th>
-      <th>마감기한</th>
-      <th colspan="4"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @works.each do |work| %>
-      <% if !work.due || work.due.dueDate >= Time.zone.now %>
-      <tr>
-        <td><%= work.user_id %></td>
-        <td>
-          <% if work.completion == false %>
-            <div id="work-<%=work.id%>">
-              <%= work.title %>
-              </div>
-          <% else %>
-            <del><%= work.title %></del>
-          <% end %>
-        </td>
-        <td><%= work.content %></td>
-        <td><%= work.completion %></td>
-        <td>
-          <% if work.due %>
-            <%= work.due.dueDate %>
-          <% end %>
-        </td>
-        <td><%= link_to '보기', work %></td>
-        <td><%= link_to '수정', edit_work_path(work) %></td>
-        <td><%= link_to '완료', completion_work_path(work), method: :patch, remote: true %></td>
-        <td><%= link_to '삭제', work, method: :delete, data: { confirm: '삭제하시겠어요?' } %></td>
-      </tr>
-      <% end %>
+  <span id="header-login">
+    <% if user_signed_in? %>
+      <%= current_user.email %>
+      <%= link_to "로그아웃", destroy_user_session_path, method: :delete %>
     <% end %>
-  </tbody>
-</table>
-
-<br>
-
-<div>
-  <%= link_to '추가하기', new_work_path %>
+  </span>
 </div>
 
-<br>
 
-<h1>마감기한이 지난 일</h1>
 
-<table>
-  <thead>
-    <tr>
-      <th>User</th>
-      <th>Title</th>
-      <th>Content</th>
-      <th>Completion</th>
-      <th>마감기한</th>
-      <th colspan="4"></th>
-    </tr>
-  </thead>
 
-  <tbody>
-    <% @expiredWorks.each do |work| %>
-      <tr>
-        <td><%= work.user_id %></td>
-        <td>
-          <% if work.completion == false %>
-            <div id="work-<%=work.id%>">
-              <%= work.title %>
-              </div>
-          <% else %>
-            <del><%= work.title %></del>
-          <% end %>
-        </td>
-        <td><%= work.content %></td>
-        <td><%= work.completion %></td>
-        <td>
-          <% if work.due %>
-            <%= work.due.dueDate %>
-          <% end %>
-        </td>
-        <td><%= link_to '보기', work %></td>
-        <td><%= link_to '수정', edit_work_path(work) %></td>
-        <td><%= link_to '완료', completion_work_path(work), method: :patch, remote: true %></td>
-        <td><%= link_to '삭제', work, method: :delete, data: { confirm: '삭제하시겠어요?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+
+
+<div class="container">
+  <div class="row">
+    <div class="col-sm-6">
+      <div class="todolist">
+        <h1>할 일</h1>
+        <table>
+          <tbody class="sortable">
+            <% @works.each do |work| %>
+              <% if !work.due || work.due.dueDate >= Time.zone.today %>
+              <tr id="<%= work.sortable_id%>">
+                <td>
+                <%= link_to work_path(work) do %>
+                  <% if work.completion == false %>
+                    <div id="work-<%=work.id%>">
+                      <%= work.title %>
+                      </div>
+                  <% else %>
+                    <del><%= work.title %></del>
+                  <% end %>
+                <% end %>
+                </td>
+                <td>
+                  <% if work.due %>
+                    <%= work.due.dueDate %>
+                  <% end %>
+                </td>
+                <td>
+                  <%= link_to completion_work_path(work), method: :patch, remote: true, class: 'visible-sm visible-md visible-lg' do %>
+                    <img src="/success_green.png" class="success_icon">
+                  <% end %>
+                </td>
+                <td>
+                  <%= link_to work, method: :delete, class: 'visible-sm visible-md visible-lg' do %>
+                    <img src="/close_button.png" class="close_icon">
+                  <% end %>    
+                </td>
+              </tr>
+              <% end %>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+
+      <div class='add'>
+        <%= link_to new_work_path do %>
+          <img src="/add_button.png" class="add_icon">
+        <% end %>
+      </div>
+    </div>
+
+    <div class="col-sm-6">
+      <div class="todolist expired">
+        <h1>마감기한이 지난 일</h1>
+        <table>
+          <tbody>
+            <% @expiredWorks.each do |work| %>
+              <tr>
+                <td>
+                  <% if work.completion == false %>
+                    <div id="work-<%=work.id%>">
+                      <%= work.title %>
+                      </div>
+                  <% else %>
+                    <del><%= work.title %></del>
+                  <% end %>
+                </td>
+                <td>
+                  <% if work.due %>
+                    <%= work.due.dueDate %>
+                  <% end %>
+                </td>
+                <td>
+                  <%= link_to completion_work_path(work), method: :patch, remote: true, class: 'visible-sm visible-md visible-lg' do %>
+                    <img src="/success_green.png" class="success_icon">
+                  <% end %>
+                </td>
+                <td>
+                  <%= link_to work, method: :delete, class: 'visible-sm visible-md visible-lg' do %>
+                    <img src="/close_button.png" class="close_icon">
+                  <% end %>    
+                </td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<script type="text/javascript">
+
+
+
+$(function() {
+  $('.sortable').railsSortable();
+});
+
+
+</script>

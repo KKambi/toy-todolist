@@ -1,24 +1,36 @@
-<p id="notice"><%= notice %></p>
+<div class="login-form">
+<div class="header">
+  <span id="header-title">
+    <img src="/success_green.png" id="header-icon">
+    Todo
+  </span>
 
-<p>
-  <strong>User:</strong>
-  <%= @work.user_id %>
-</p>
+</div>
 
+<h1 style="text-align: center; margin-bottom: 30px;">할 일</h1>
+
+
+<div class="show-form">
 <p>
-  <strong>Title:</strong>
+  <strong>제목: </strong>
   <%= @work.title %>
 </p>
 
 <p>
-  <strong>Content:</strong>
+  <strong>설명: </strong>
   <%= @work.content %>
 </p>
 
 <p>
-  <strong>Completion:</strong>
-  <%= @work.completion %>
+	<strong>완료: </strong>
+  	<% if @work.completion %>
+     <img src="/success_green.png" class="success_icon" style="margin-bottom: 2px">
+  	<% else %>
+   		<img src="/close_button.png" class="close_icon" style="margin-bottom: 2px">
+  	<% end %>
 </p>
 
-<%= link_to 'Edit', edit_work_path(@work) %> |
-<%= link_to 'Back', works_path %>
+<%= link_to '수정', edit_work_path(@work) %> |
+<%= link_to '뒤로', works_path %>
+</div>
+</div>

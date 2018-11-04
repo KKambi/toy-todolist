@@ -6,8 +6,8 @@ class WorksController < ApplicationController
   # GET /works
   # GET /works.json
   def index
-    @works = Work.where("user_id = ?", current_user.id)
-    @expiredWorks = @works.joins(:due).where("dueDate < ?", Time.zone.now)
+    @works = Work.where("user_id = ?", current_user.id).order(:sort)
+    @expiredWorks = @works.joins(:due).where("dueDate < ?", Time.zone.today)
   end
 
   # GET /works/1
@@ -32,7 +32,7 @@ class WorksController < ApplicationController
     @work.user_id = current_user.id
     respond_to do |format|
       if @work.save
-        format.html { redirect_to works_path, notice: '추가 완료!' }
+        format.html { redirect_to works_path }
         format.json { render :show, status: :created, location: @work }
       else
         format.html { render :new }
@@ -46,7 +46,7 @@ class WorksController < ApplicationController
   def update
     respond_to do |format|
       if @work.update(work_params)
-        format.html { redirect_to works_path, notice: '수정 완료!' }
+        format.html { redirect_to works_path }
         format.json { render :show, status: :ok, location: @work }
       else
         format.html { render :edit }
@@ -68,7 +68,7 @@ class WorksController < ApplicationController
   def destroy
     @work.destroy
     respond_to do |format|
-      format.html { redirect_to works_url, notice: 'Work was successfully destroyed.' }
+      format.html { redirect_to works_url }
       format.json { head :no_content }
     end
   end

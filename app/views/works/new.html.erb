@@ -1,5 +1,30 @@
-<h1>할 일 추가</h1>
+<div class="login-form">
+<div class="header">
+  <span id="header-title">
+    <img src="/success_green.png" id="header-icon">
+    Todo
+  </span>
+</div>
+
+<h1 style="text-align: center;">할 일 추가</h1>
 
 <%= render 'form', work: @work %>
 
-<%= link_to '뒤로가기', works_path %>
+<div class="field-input">
+  <%= link_to '뒤로', works_path %>
+</div>
+</div>
+
+
+
+<script type="text/javascript">
+
+$(document).ready(function() {
+	$('#expiration-input').hide();
+  $('#expiration').click(function(){
+      $('#expiration-input').show();
+    });
+});
+
+
+</script>

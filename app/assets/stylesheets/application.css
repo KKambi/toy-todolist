@@ -13,3 +13,95 @@
  *= require_tree .
  *= require_self
  */
+ 
+@import url('https://fonts.googleapis.com/css?family=Noto+Sans');
+
+.header {
+	margin-bottom: 20px;
+}
+
+a {
+	color: #000;
+}
+
+a:link { 
+	text-decoration: none;
+}
+
+a:hover { 
+	color: #25ae88;
+	text-decoration: none;
+}
+
+.todolist h1 {
+	text-align: center;
+}
+
+.todolist table {
+	width: 80%;
+	margin-right: auto;
+	margin-left: auto;
+	margin-bottom: 5%;
+	margin-top: 5%;
+}
+
+.add {
+	text-align: center;
+}
+
+#header-icon {
+	width: 20px;
+	height: auto;
+}
+
+#header-title {
+	font-size: 20px;
+}
+
+#header-login {
+	float: right;
+}
+
+.success_icon {
+	width: 15px;
+	height: auto;
+}
+
+.close_icon {
+	width: 15px;
+	height: auto;
+}
+
+.login-form {
+	width: 20%;
+	margin: auto;
+}
+
+#login-form-header {
+	display: flex;
+	justify-content: center;
+}
+
+.login-form label {
+	text-align: center;
+	margin-top: 30px;
+	margin-bottom: 5px;
+}
+
+.actions {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	margin-top: 30px;
+}
+
+.field-input {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.show-form {
+	text-align: center;
+}
+

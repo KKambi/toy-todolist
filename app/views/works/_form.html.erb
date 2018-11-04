@@ -13,21 +13,32 @@
 
   <div class="field">
     <%= form.label :제목 %>
+    <div class="field-input">
     <%= form.text_field :title %>
+    </div>
   </div>
 
   <div class="field">
     <%= form.label :내용 %>
+    <div class="field-input">
     <%= form.text_area :content %>
+    </div>
   </div>
 
   <div class="field">
     <%= form.fields_for :due do |due_form| %>
-      마감기한 : <%= due_form.date_field :dueDate %>
+      <div class="field-input">
+      <%= form.label :'마감기간 입력하기', id: 'expiration', class: 'btn btn-default' %>
+      </div>
+      <div class="field-input" id="expiration-input">
+        <%= due_form.date_field :dueDate %>
+      </div>  
     <% end %>  
   </div>
 
   <div class="actions">
-    <%= form.submit "완료" %>
+    <%= form.submit "완료", class: 'btn btn-default' %>
   </div>
 <% end %>
+
+
